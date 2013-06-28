@@ -111,7 +111,7 @@ import sys
 
 if sys.version > "3":
     long = int
-from datetime import datetime, date
+from datetime import datetime, date, time
 from io import BytesIO
 from struct import pack, unpack
 from calendar import timegm
@@ -564,7 +564,8 @@ class BSON_Datetime(BSON_Value):
     _code = b"\x09"
 
     def __init__(self, value):
-        self._value = value
+        self._value = datetime.combine(date, time(0)) \
+            if isinstance(value, date) else value
 
     def _py_value(self):
         return self._value
