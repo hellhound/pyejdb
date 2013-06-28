@@ -111,7 +111,7 @@ import sys
 
 if sys.version > "3":
     long = int
-from datetime import datetime
+from datetime import datetime, date
 from io import BytesIO
 from struct import pack, unpack
 from calendar import timegm
@@ -777,6 +777,7 @@ if PY3:
         BytesIO: lambda b: BSON_Binary_Generic(b.getvalue()),
         bool: lambda b: BSON_Boolean(b),
         datetime: lambda dt: BSON_Datetime(dt),
+        date: lambda dt: BSON_Datetime(dt),
         type(None): lambda n: BSON_Null(n),
         }
 else:
@@ -795,6 +796,7 @@ else:
         BytesIO: lambda b: BSON_Binary_Generic(b.getvalue()),
         bool: lambda b: BSON_Boolean(b),
         datetime: lambda dt: BSON_Datetime(dt),
+        date: lambda dt: BSON_Datetime(dt),
         type(None): lambda n: BSON_Null(n),
         }
 
